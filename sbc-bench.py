@@ -159,9 +159,9 @@ def run_7zip_benchmark(system_id, overwrite):
 
 
 def run_openssl_benchmark(system_id, overwrite):
-    """Run the OpenSSL AES-256-GCM benchmark."""
+    """Run the OpenSSL AES-256-CBC benchmark."""
     output = run_benchmark(
-        "openssl", "openssl speed -elapsed -evp aes-256-gcm", system_id, overwrite
+        "openssl", "openssl speed -elapsed -evp aes-256-cbc", system_id, overwrite
     )
     return parse_openssl_output(output)
 
