@@ -29,3 +29,7 @@ It has the following command-line arguments:
 - `--install`: Automatically install some required dependencies (requires root).
 - `--overwrite`: Re-run benchmarks and overwrite existing results.
 - `-c`: Include the cpuminer benchmark (disabled by default).
+
+## Docker
+
+The simplest way of running this benchmark is by using Docker. Provided you have Docker installed and the current user is part of the `docker` group, all you need is to call `./run.sh` to build the Docker image and run the benchmark.
