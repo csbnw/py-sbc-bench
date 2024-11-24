@@ -274,7 +274,7 @@ def print_summary(results):
     return scores
 
 
-def print_score(results):
+def print_score(args, results):
     """Print system information and scores in sbc-bench format."""
     scores = list()
     for _, metrics in results.items():
@@ -290,7 +290,7 @@ def print_score(results):
     summary = f"\n| {cpu_name} | {mhz} | {short_kernel_version} | {distro_info} | {' | '.join(map(str, scores))} | "
 
     # Complete output in case cpuminer was not executed
-    if len(scores) == 5:
+    if not args.c:
         summary += "0 |"
 
     print(summary)
@@ -329,7 +329,7 @@ def main():
         results["CPUMiner"] = run_cpuminer_benchmark(system_id, args.overwrite)
 
     print_summary(results)
-    print_score(results)
+    print_score(args, results)
 
 
 if __name__ == "__main__":
