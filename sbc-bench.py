@@ -14,10 +14,11 @@ REPOS = {
     "cpuminer-multi": "https://github.com/tpruvot/cpuminer-multi",
 }
 
-DEPENDENCIES = (
-    "automake autoconf pkg-config libcurl4-openssl-dev libjansson-dev "
-    "libssl-dev libgmp-dev make g++ zlib1g-dev 7zip git lsb-release"
-)
+PACKAGES = {
+    "7zip": "7zip",
+    "tinymembench": "make gcc",
+    "cpuminer-multi": "automake make libssl-dev libcurl4-openssl-dev g++ zlib1g-dev",
+}
 
 
 def check_root():
@@ -70,13 +71,13 @@ def run_command(command, cwd=None, log_file=None, timeout=0):
     return open(log_file).read()
 
 
-def install_dependencies():
-    """Install required dependencies."""
-    print("Installing dependencies...")
-    if run_command(f"apt-get update && apt-get install -y {DEPENDENCIES}"):
-        print("Dependencies installed successfully.\n")
+def install_packages(packages):
+    """Install required packages."""
+    print("Installing packages...")
+    if run_command(f"apt update && apt install -y {packages}"):
+        print("Packages installed successfully.\n")
     else:
-        print("Failed to install dependencies.")
+        print("Failed to install packages.")
         sys.exit(1)
 
 
@@ -308,7 +309,10 @@ def main():
 
     if args.install:
         check_root()
-        install_dependencies()
+        packages = " ".join([PACKAGES["7zip"], PACKAGES["tinymembench"]])
+        if args.c:
+            packages += " " + PACKAGES["cpuminer-multi"]
+        install_packages(packages)
 
     system_id = generate_system_id()
 
