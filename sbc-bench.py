@@ -114,11 +114,11 @@ def parse_7zip_output(output):
 
 
 def parse_openssl_output(output):
-    """Extract AES-256-GCM performance metrics."""
-    match = re.search(r"AES-256-GCM\s+(\d+\.\d+)", output, re.MULTILINE)
+    """Extract AES-256-CBC performance metrics."""
+    match = re.search(r"AES-256-CBC\s+(\d+\.\d+)", output, re.MULTILINE)
     if match:
         score = float(match.group(1))
-        return {"AES-256-GCM Speed (MB/s)": round(score)}
+        return {"AES-256-CBC Speed (MB/s)": round(score)}
     return {}
 
 
