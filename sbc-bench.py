@@ -15,6 +15,7 @@ REPOS = {
 }
 
 PACKAGES = {
+    "system-info": "lsb-release",
     "7zip": "7zip",
     "tinymembench": "make gcc",
     "cpuminer-multi": "automake make libssl-dev libcurl4-openssl-dev g++ zlib1g-dev",
@@ -309,7 +310,9 @@ def main():
 
     if args.install:
         check_root()
-        packages = " ".join([PACKAGES["7zip"], PACKAGES["tinymembench"]])
+        packages = " ".join(
+            [PACKAGES["system-info"], PACKAGES["7zip"], PACKAGES["tinymembench"]]
+        )
         if args.c:
             packages += " " + PACKAGES["cpuminer-multi"]
         install_packages(packages)
